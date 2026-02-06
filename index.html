@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soluciones Académicas - Emanuel  Perdomo</title>
+    <style>
+        :root { --bhd-blue: #004a99; --wa-green: #25D366; --light-bg: #f4f7f6; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--light-bg); margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .header { text-align: center; margin-bottom: 25px; }
+        .slogan { font-style: italic; color: #666; font-size: 0.9em; margin-top: 5px; }
+        
+        .payment-card { background: #eef5ff; border: 1px solid #d0e3ff; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
+        .payment-card h3 { margin-top: 0; color: var(--bhd-blue); font-size: 1.1em; }
+        
+        label { display: block; font-weight: bold; margin: 15px 0 5px; font-size: 0.9em; }
+        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 1em; }
+        
+        .btn-send { background: var(--wa-green); color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 1.1em; font-weight: bold; cursor: pointer; margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-send:active { transform: scale(0.98); }
+        .note { font-size: 0.8em; color: #888; text-align: center; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h2 style="margin:0; color: var(--bhd-blue);">Emanuel Perdomo</h2>
+        <p class="slogan">"No te preocupes ni te estreses, somos la solución a tus problemas"</p>
+    </div>
+
+    <div class="payment-card">
+        <h3>💳 Datos de Pago (BHD)</h3>
+        <p style="margin: 5px 0;"><strong>Cuenta de Ahorros:</strong> 34729070012</p>
+        <p style="margin: 5px 0;"><strong>Titular:</strong>Joan Emanuel Acosta  Perdomo</p>
+    </div>
+
+    <form id="orderForm">
+        <label>Tu Nombre</label>
+        <input type="text" id="nombre" placeholder="Escribe tu nombre" required>
+
+        <label>¿Qué necesitas que haga?</label>
+        <textarea id="descripcion" rows="4" placeholder="Explícame tu trabajo, tarea o diapositiva..." required></textarea>
+
+        <label>Tipo de Trabajo</label>
+        <select id="tipo">
+            <option value="Diapositivas">Diapositivas</option>
+            <option value="Trabajo Escrito">Trabajo Escrito</option>
+            <option value="Proyecto Completo">Proyecto Completo</option>
+            <option value="Otro">Otro</option>
+        </select>
+
+        <label>Monto pagado ($)</label>
+        <input type="number" id="monto" placeholder="Ej: 500" required>
+
+        <button type="button" class="btn-send" onclick="enviarPedido()">
+            Enviar Pedido por WhatsApp
+        </button>
+    </form>
+
+    <p class="note">Al hacer clic, se abrirá WhatsApp para que adjuntes la captura de tu comprobante.</p>
+</div>
+
+<script>
+    function enviarPedido() {
+        const nombre = document.getElementById('nombre').value;
+        const desc = document.getElementById('descripcion').value;
+        const tipo = document.getElementById('tipo').value;
+        const monto = document.getElementById('monto').value;
+        const telefono = "18299575543"; // Tu número según el banner
+
+        if(!nombre || !desc || !monto) {
+            alert("Por favor rellena todos los campos.");
+            return;
+        }
+
+        const mensaje = `*NUEVO PEDIDO - SOLUCIONES*%0A%0A` +
+                        `*Cliente:* ${nombre}%0A` +
+                        `*Servicio:* ${tipo}%0A` +
+                        `*Descripción:* ${desc}%0A` +
+                        `*Monto Pagado:* $${monto}%0A%0A` +
+                        `_Adjunto el comprobante a continuación..._`;
+
+        const url = `https://wa.me/${telefono}?text=${mensaje}`;
+        window.open(url, '_blank');
+    }
+</script>
+
+</body>
+</html>
